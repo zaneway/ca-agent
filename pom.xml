@@ -28,12 +28,25 @@
 	</scm>
 	<properties>
 		<java.version>21</java.version>
+		<mybatis-spring-boot.version>4.0.0</mybatis-spring-boot.version>
+		<mybatis-generator.version>2.0.0</mybatis-generator.version>
 		<spring-ai.version>2.0.0</spring-ai.version>
+		<generator.jdbc-url>${env.MYSQL_URL}</generator.jdbc-url>
+		<generator.jdbc-username>${env.MYSQL_USERNAME}</generator.jdbc-username>
+		<generator.jdbc-password>${env.MYSQL_PASSWORD}</generator.jdbc-password>
+		<generator.table-name>${env.MYBATIS_GENERATOR_TABLE}</generator.table-name>
+		<generator.model-package>com.github.zaneway.agent.ca.persistence.entity</generator.model-package>
+		<generator.mapper-package>com.github.zaneway.agent.ca.persistence.mapper</generator.mapper-package>
 	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-jdbc</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.mybatis.spring.boot</groupId>
+			<artifactId>mybatis-spring-boot-starter</artifactId>
+			<version>${mybatis-spring-boot.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -77,6 +90,9 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+
+
+
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
@@ -91,6 +107,23 @@
 
 	<build>
 		<plugins>
+			<plugin>
+				<groupId>org.mybatis.generator</groupId>
+				<artifactId>mybatis-generator-maven-plugin</artifactId>
+				<version>${mybatis-generator.version}</version>
+				<configuration>
+					<configurationFile>${project.basedir}/src/main/resources/generator/generatorConfig.xml</configurationFile>
+					<overwrite>true</overwrite>
+					<verbose>true</verbose>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>com.mysql</groupId>
+						<artifactId>mysql-connector-j</artifactId>
+						<version>${mysql.version}</version>
+					</dependency>
+				</dependencies>
+			</plugin>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
