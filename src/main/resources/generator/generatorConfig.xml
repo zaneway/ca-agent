@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+	PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+	"https://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+	<context id="mysql" targetRuntime="MyBatis3Simple" defaultModelType="flat">
+		<property name="javaFileEncoding" value="UTF-8"/>
+
+		<plugin type="org.mybatis.generator.plugins.MapperAnnotationPlugin"/>
+
+		<commentGenerator>
+			<property name="suppressDate" value="true"/>
+			<property name="addRemarkComments" value="true"/>
+		</commentGenerator>
+
+		<jdbcConnection
+			driverClass="com.mysql.cj.jdbc.Driver"
+			connectionURL="${generator.jdbc-url}"
+			userId="${generator.jdbc-username}"
+			password="${generator.jdbc-password}">
+			<!-- 限制元数据查询到 JDBC URL 指定的数据库，避免扫描同一实例上的其他 schema。 -->
+			<property name="nullCatalogMeansCurrent" value="true"/>
+		</jdbcConnection>
+
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false"/>
+			<property name="useJSR310Types" value="true"/>
+		</javaTypeResolver>
+
+		<modelGenerator
+			targetPackage="${generator.model-package}"
+			targetProject="src/main/java">
+			<property name="enableSubPackages" value="true"/>
+		</modelGenerator>
+
+		<sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources">
+			<property name="enableSubPackages" value="true"/>
+		</sqlMapGenerator>
+
+		<clientGenerator
+			type="XMLMAPPER"
+			targetPackage="${generator.mapper-package}"
+			targetProject="src/main/java">
+			<property name="enableSubPackages" value="true"/>
+		</clientGenerator>
+
+		<!-- 将 % 和 _ 按普通表名字符处理，防止 JDBC metadata 通配符误匹配多表。 -->
+		<table tableName="${generator.table-name}" escapeWildcards="true"/>
+	</context>
+</generatorConfiguration>

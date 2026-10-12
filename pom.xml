@@ -30,7 +30,7 @@
 		<java.version>21</java.version>
 		<mybatis-spring-boot.version>4.0.0</mybatis-spring-boot.version>
 		<mybatis-generator.version>2.0.0</mybatis-generator.version>
-		<spring-ai.version>2.0.0</spring-ai.version>
+		<spring-ai.version>2.0.1</spring-ai.version>
 		<generator.jdbc-url>${env.MYSQL_URL}</generator.jdbc-url>
 		<generator.jdbc-username>${env.MYSQL_USERNAME}</generator.jdbc-username>
 		<generator.jdbc-password>${env.MYSQL_PASSWORD}</generator.jdbc-password>
