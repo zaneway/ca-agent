@@ -49,6 +49,8 @@ prompt:
 
 
 ca-agent:
+  chars:
+    question: 5000
   default-chat-model: minimax
   rag:
     top-k: ${RFC_RAG_TOP_K:5}

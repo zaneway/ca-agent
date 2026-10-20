@@ -47,6 +47,8 @@ public class PlanService {
 
 	private final int topK;
 
+	private final int maxQuestionChars;
+
 	private final double similarityThreshold;
 
 	private final int maxContextChars;
@@ -56,6 +58,7 @@ public class PlanService {
 			@Value("${prompt.plan}") String routingPrompt,
 			@Value("${prompt.answer-with-rfc-context}") String contextualAnswerPrompt,
 			@Value("${prompt.direct-answer}") String directAnswerPrompt,
+			@Value("${ca-agent.chars.question:5000}") int maxQuestionChars,
 			@Value("${ca-agent.rag.top-k:5}") int topK,
 			@Value("${ca-agent.rag.similarity-threshold:0.65}") double similarityThreshold,
 			@Value("${ca-agent.rag.max-context-chars:16000}") int maxContextChars) {
@@ -65,7 +68,8 @@ public class PlanService {
 		this.contextualAnswerPrompt = contextualAnswerPrompt;
 		this.directAnswerPrompt = directAnswerPrompt;
 		this.topK = topK;
-		this.similarityThreshold = similarityThreshold;
+    this.maxQuestionChars = maxQuestionChars;
+    this.similarityThreshold = similarityThreshold;
 		this.maxContextChars = maxContextChars;
 	}
 
